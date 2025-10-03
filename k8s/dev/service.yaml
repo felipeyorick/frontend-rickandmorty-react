@@ -8,6 +8,7 @@ spec:
     app: rickandmorty
   ports:
     - protocol: TCP
-      port: 3000        # Puerto expuesto dentro del cluster
-      targetPort: 3000  # Puerto del contenedor
+      port: 80        # Puerto expuesto dentro del cluster
+      targetPort: 80  # Puerto del contenedor
+      protocol: TCP
   type: ClusterIP       # Opciones: ClusterIP (default), NodePort, LoadBalancer
