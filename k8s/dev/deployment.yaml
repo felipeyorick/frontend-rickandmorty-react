@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-react
+  namespace: develop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-react
+  template:
+    metadata:
+      labels:
+        app: frontend-react
+    spec:
+      containers:
+        - name: frontend-react
+          image: felipeyorick/frontend-react:v0.0.1
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: "http://rickandmorty-service.develop.svc.cluster.local:3000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-react-service
+  namespace: develop
+spec:
+  selector:
+    app: frontend-react
+  ports:
+    - port: 80
+      targetPort: 80
+  type: NodePort

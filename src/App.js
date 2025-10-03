@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(null);
+
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
+
+  useEffect(() => {
+    axios.get(`${backendUrl}/characters`)
+      .then(res => setCharacters(res.data.slice(0, 5)))
+      .catch(() => setError("❌ Error comunicando con el backend"));
+  }, [backendUrl]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h1>Rick and Morty - Frontend React</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <ul>
+        {characters.map(c => (
+          <li key={c.id}>
+            <img src={c.image} alt={c.name} width="50" style={{ marginRight: "10px" }} />
+            {c.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
