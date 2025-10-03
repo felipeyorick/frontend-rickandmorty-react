@@ -5,10 +5,10 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
 
-  const backendUrl = "http://rickandmorty-service.develop.svc.cluster.local:3000";
+  const backendUrl = "/api";
 
   useEffect(() => {
-    axios.get(`${backendUrl}/characters`)
+    axios.get(`http://localhost:3000/characters`)
       .then(res => setCharacters(res.data.slice(0, 5)))
       .catch(() => setError("❌ Error comunicando con el backend"));
   }, [backendUrl]);
