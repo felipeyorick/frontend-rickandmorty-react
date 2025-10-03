@@ -5,7 +5,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
+  const backendUrl = "http://rickandmorty-service.develop.svc.cluster.local:3000";
 
   useEffect(() => {
     axios.get(`${backendUrl}/characters`)
