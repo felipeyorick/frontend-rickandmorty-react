@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend-react
-          image: felipeyorick/frontend-react:v0.0.1
+          image: felipeyorick/frontend-react:f065555611ab7353167172c614114e4b9a89f04e
           ports:
             - containerPort: 80
           env:
